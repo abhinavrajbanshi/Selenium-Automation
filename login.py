@@ -3,6 +3,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+
 driver=webdriver.Chrome()
 driver.maximize_window()
 url="https://www.saucedemo.com/"
@@ -46,8 +47,19 @@ password.send_keys("secret_sauce")
 time.sleep(1)
 login_button.click()
 time.sleep(1)
+
 if driver.current_url=="https://www.saucedemo.com/inventory.html":
     print("Login successful")
 else:
     print("Login Failed")
+
+#assert "inventory" in driver.current_url, "Login Failed!"
+
+#DropDown
+from selenium.webdriver.support.ui import Select
+dropdown_menu=driver.find_element(By.XPATH, "//select[@aria-label='Sort products']")
+select=Select(dropdown_menu)
+select.select_by_value("lohi")
+time.sleep(2)
+
 driver.quit()
